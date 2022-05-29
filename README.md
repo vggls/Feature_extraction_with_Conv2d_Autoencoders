@@ -18,6 +18,7 @@ From now one we refer to the hand-crafted features of pyAudioAnalysis as "high-l
 The "main_ntbk.ipynb" notebook is structured as follows :
 
 #### 1) MSP Podcast
+    In the first section of the notebook we prepare the folders 
 
 #### 2) Exploring the signal size of the audio files - Elimination of short ones
 
