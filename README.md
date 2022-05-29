@@ -9,7 +9,7 @@ In short, the repo consists of the following files :
 - autoencoder_training_and_tuning.ipynb : Colab notebook that contains the training and tuning of the architectures included in the autoencoders.py file.
 - "files" folder : Contains training/test data and spectograms pickle files and the final (tuned) encoder model that we use for feature extraction.
 
-## ==========================================================================================
+## *********************************************************************************
 
 Below one may find a detailed presentation of the main points and results to consider while reading the "main_ntbk.ipynb" file. 
 
