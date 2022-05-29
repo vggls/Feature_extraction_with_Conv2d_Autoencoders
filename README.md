@@ -1,7 +1,7 @@
 ## Repo summary/presentation (UNDER CONSTRUCTION - to be completed by 5 June, 2022)
 
-This repo explores the use of convolutional autoencoders as feature extraction tools compared to hand-crafted features obtained by the pyAudioAnalysis Python library.
-For the purposes of the experiments we consider the valence class data of the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset.
+This repo explores the use of convolutional autoencoders as feature extraction tools compared to hand-crafted features obtained by the pyAudioAnalysis Python library, in a scenario where the available training dataset consists of "a few" labelled points and "many" unlabelled points (of the same data source).
+For the purposes of our experiments we consider data from the valence class of the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset. They are divided into "negative", "neutral" and "positive" (sub)classes.
 
 In short, the repo consists of the following files :
 - main_ntbk.ipynb : The main repo (Jupyter) notebook that contains sections describing each experiment step
@@ -18,8 +18,11 @@ From now one we refer to the hand-crafted features of pyAudioAnalysis as "high-l
 The "main_ntbk.ipynb" notebook is structured as follows :
 
 #### 1) MSP Podcast
-    In the first section of the notebook we prepare the folders 
-
+    In this study we divide the data into 3 speaker independent sets and this section is dedicated into properly constructing them.
+    - In the first place we build a "training_folder" divided into 3 subfolders of 400 audio points each (one subfolder for each valence class). The purpose of this set is to represent the "small" group of labelled training data.
+    - Similarly, we build a "unlabelled_folder" divided into 3 subfolders of 3300 points each. These points will be used later without their labels and represent the "large" group of unlabelled training data. Note that only for this section we considered their labels as well in an attempt to have a "balanced" split of the data.
+    - Finally, we build the "test_folder" divided into 3 subfolders of 500 each. These points are used for testing via their high-level and code representations.
+    
 #### 2) Exploring the signal size of the audio files - Elimination of short ones
 
 #### 3) Unlabelled data : Spectograms
