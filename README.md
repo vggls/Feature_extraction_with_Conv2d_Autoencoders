@@ -20,7 +20,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 
 ## 1) MSP Podcast
 
-### 2) Exploring the signal size of the audio files - Elimination of short ones
+#### 2) Exploring the signal size of the audio files - Elimination of short ones
 
 3) Unlabelled data : Spectograms
 
