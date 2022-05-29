@@ -1,10 +1,11 @@
 ## Repo summary (UNDER CONSTRUCTION - to be completed by 5 June, 2022)
 
-This repo explores the use of autoencoders as feature extraction tools compared to hand-crafted features obtained by the pyAudioAnalysis Python library.
-For the purposes of the experiments the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset was used.
+This repo explores the use of convolutional autoencoders as feature extraction tools compared to hand-crafted features obtained by the pyAudioAnalysis Python library.
+For the purposes of the experiments we consider the valence class data of the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset.
 
 The repo consists of the following files :
-- main_notebook.ipynb
-- autoencoder_training_and_tuning.ipynb
-- "files" folder with pickle files and saved models
+- main_ntbk.ipynb : The main repo (Jupyter) notebook that contains sections describing each experiment step
+- autoencoders.py : Contains hand-written symmetric convolutional autoencoder architectures. They take as input fixed size spectograms of (74,200) size and are parametrized with respect to the latent (bottleneck) dimension of the autoencoder.  
+- autoencoder_training_and_tuning.ipynb : This Colab notebook contains the training and tuning of the architectures included in the autoencoders.py file.
+- "files" folder : Contains training/test data and spectograms pickle files and the final (tuned) encoder model that we use for feature extraction.
 
