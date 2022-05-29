@@ -10,6 +10,7 @@ In short, the repo consists of the following files :
 - "files" folder : Contains training/test data and spectograms pickle files and the final (tuned) encoder model that we use for feature extraction.
 
 ==========================================================================================
+==========================================================================================
 
 Below one may find a detailed presentation of the main points and results to consider while reading the "main_ntbk.ipynb" file. 
 
@@ -17,9 +18,9 @@ From now one we refer to the hand-crafted features of pyAudioAnalysis as "high-l
 
 The "main_ntbk.ipynb" notebook is structured as follows :
 
-1) MSP Podcast
+## 1) MSP Podcast
 
-2) Exploring the signal size of the audio files - Elimination of short ones
+### 2) Exploring the signal size of the audio files - Elimination of short ones
 
 3) Unlabelled data : Spectograms
 
