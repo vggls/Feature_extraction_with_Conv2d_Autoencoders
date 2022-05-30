@@ -47,6 +47,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    - training set: 350 "negative", 362 "neutral" and 319 "positive" points 319
    - unlabelled set: 2781 "negative", 2674 "neutral" and 2622 "positive" points
    - test set: 432 "negative", 421 "neutral" and 383 "positive" points
+     (the test set numbers are computed in detail in section 7)
 
 
 #### 3) Unlabelled data : Spectograms
