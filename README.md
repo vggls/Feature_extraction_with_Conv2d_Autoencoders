@@ -43,7 +43,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      <img src="https://user-images.githubusercontent.com/55101427/171047881-5d08b548-3d7b-4404-b8df-21b02ce7c1b5.png" height="250" width="500" />
    </p>
    
-   By eliminating signals of size less than 30000 samples, the number of the experiment contributing points is re-arranged as follows :
+   By eliminating signals of size less than 30K samples, the number of the experiment contributing points is re-arranged as follows :
    - training set: 350 "negative", 362 "neutral" and 319 "positive" points 319
    - unlabelled set: 2781 "negative", 2674 "neutral" and 2622 "positive" points
    - test set: 432 "negative", 421 "neutral" and 383 "positive" points
