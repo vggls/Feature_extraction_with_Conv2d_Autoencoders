@@ -1,3 +1,3 @@
-hlf = high level features
+hlf = high level features = pyAudioAnalysis features
 
-cf = code features
+cf = code features = Autoencoder features
