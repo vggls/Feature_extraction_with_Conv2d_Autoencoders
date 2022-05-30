@@ -7,7 +7,7 @@ The unlabelled points are used via their spectograms to train a symmetric convol
 For the purposes of our experiments we consider data from the valence class of the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset. They are divided into "negative", "neutral" and "positive" (sub)classes.
 
 In short, this repo consists of the following :
-- main_ntbk.ipynb : The main repo (Jupyter) notebook that contains sections describing each experiment step
+- main_ntbk.ipynb : The main repo (Jupyter) notebook that contains sections describing each experiment step.
 - autoencoders.py : Contains hand-written symmetric convolutional autoencoder architectures. They take as input fixed size spectograms of (74,200) size and are parametrized with respect to the latent (bottleneck) dimension of the autoencoder.  
 - autoencoder_training_tuning.ipynb : Colab notebook that contains the training and tuning of the architectures included in the autoencoders.py file.
 - "files" folder : Contains training/test data features pickle files and the final encoder model that we use for code feature extraction.
