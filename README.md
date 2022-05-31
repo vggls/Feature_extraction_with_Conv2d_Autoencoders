@@ -1,6 +1,6 @@
 ## Repo summary/presentation (UNDER CONSTRUCTION - to be completed by 5 June, 2022)
 
-This repo focuses the use of convolutional autoencoders as feature extraction tools when compared to hand-crafted features obtained by the pyAudioAnalysis Python library, in a scenario where the available training dataset consists of "a few" labelled points and "many" unlabelled points (of the same data source).
+This repo explores the use of convolutional autoencoders as feature extraction tools when compared to hand-crafted features obtained by the pyAudioAnalysis Python library, in a scenario where the available training dataset consists of "a few" labelled points and "many" unlabelled points (of the same data source).
 
 The unlabelled points are used via their spectograms to train a symmetric convolutional autoencoder which learns feature representations of the data. In each iteration of the experiment we consider potions (percentages) of the labelled training data to train two SVM classifiers of C=10 on their hand-crafted and autoencoder features respectively. Finally, the learned classifiers are tested on hand-crafted and code representations of a test dataset, where we keep the weighted F1 scores.
 
@@ -50,7 +50,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      (the test set numbers are computed in detail in section 7)
 
 #### 3) Unlabelled data : Spectograms
-   In this section the spectograms of the unlabelled data are constructed. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
+   In this section the spectograms of the unlabelled data are constructed, at (short) window and step sizes of 0.05 as per pyAudioAnalysis "spectogram" method. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
    
    Eventually, we get 11300 spectograms corresponding to the 8077 unlabelled data. They are saved in the "spectograms_of_unlabelled_data.pickle" file.
 
@@ -66,8 +66,6 @@ In the end of the notebook, we choose the best autoencoder of each architecture 
 
 #### 5) Training labelled data : High Level Features, Spectograms & Code Features
 
-   (explain how we save one pickle data for each)
-   
    training_data_hlf.pickle // training_data_spectograms.pickle // training_data_cf.pickle
 
 #### 6) The SVM classifier (Tuning C)
