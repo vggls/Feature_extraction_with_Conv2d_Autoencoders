@@ -65,8 +65,24 @@ In the end of the notebook, we choose the best autoencoder of each architecture 
    Returning back to "main_ntbk.ipynb", in this short section, we load the "optimal" encoder (over all tuned above) in order to use it as code feature extractor for the training and test data. 
 
 #### 5) Training labelled data : High Level Features, Spectograms & Code Features
+   As the title suggests this section is concerned with calculating the training data features at three different levels.
+   
+   We deal with the signal size exactly as in section 3, and get the following :
+   
+   - For each data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
+   m_win=m_step=1 and s_win=s_step=0.05. 
+   
+   The points (along with their labels) are saved in the "training_data_hlf.pickle" file.
+   
+   - For each data point at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis. We note that spectograms that correspond to the same data point have the same label. Eventually, the 1031 data points yield 1491 spectograms.
+     
+     In the code, we also introduce the "var" variable which keeps track of the data point (one of the 1031) that the spectogram/label pair comes from. This is useful in order to correctly collect the training datapoints in percentages per class in section 8. This information is stored in the "track" list and is transferred to the code features below as well.
+     
+     The points (along with their labels and "track" list) are saved in the "training_data_spectograms.pickle.pickle" file.
+          
+   - For each spectogram we get its code features via the learned encoder of section 4 (use of encoder.predict() method). We have 1491 64-dim code feature vectors with the same labels as the spectograms.
 
-   training_data_hlf.pickle // training_data_spectograms.pickle // training_data_cf.pickle
+     The points (along with their labels and "track" list) are saved in the "training_data_cf.pickle" file.
 
 #### 6) The SVM classifier (Tuning C)
 
