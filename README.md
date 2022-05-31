@@ -50,7 +50,12 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      (the test set numbers are computed in detail in section 7)
 
 #### 3) Unlabelled data : Spectograms
-   In this section the spectograms of the unlabelled data are constructed, at (short) window and step sizes of 0.05 as per pyAudioAnalysis "spectogram" method. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
+   In this section the spectograms of the unlabelled data are constructed, at levels s_win=s_step=0.05 as per pyAudioAnalysis "spectogram" method. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
+   
+   In order to get a better view of the above consider the following examples:
+   When we run the command "fs, signal = aIO.read_audio_file(wav_path)", the following cases might take place :
+   - If signal.shape[0]<30000, then the file is eliminated
+   - If signal.shape[0]>=30000, consider wlog file with signal.shape[0]=70000. Then the parts [0,30000] and [30000, 60000] are kept and result in two spectograms of shape (74, 200) while the remaining (60001, 70000] sample range is eliminated.
    
    Eventually, we get 11300 spectograms corresponding to the 8077 unlabelled data. They are saved in the "spectograms_of_unlabelled_data.pickle" file.
 
@@ -62,7 +67,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    On the other hand, the Colab notebook is used for training these architectures with the spectograms of section 3. It consists of the "tune_autoencoder" function which runs 8 (2^3) training experiments per autoencoder architecture for different latent dimensions (bottleneck dimension), Adam learning rates and training batch sizes. Based on further experiments conducted we stick to the "Binary Crossentropy" loss and the "Adam" optimizer, because choices such as "MSE" loss and "SGD" optimizer did not give robust structures under many different tuning combinations. The function eventually plots the loss history of each hyperparameter combination and stores the respective encoder model. We highlight that due to Colab's limited RAM sources it was very time consuming possible to tune for more hyper-values.
 In the end of the notebook, we choose the best autoencoder of each architecture and compare them based on their loss values and their complexity.
    
-   Returning back to "main_ntbk.ipynb", in this short section, we load the "optimal" encoder (over all tuned above) in order to use it as code feature extractor for the training and test data. 
+   Returning back to "main_ntbk.ipynb", in this short section, we load the "optimal" encoder (over all tuned above) in order to use it as code feature extractor for the training and test data. The encoder is saved in the "files" folder.
 
 #### 5) Training labelled data : High Level Features, Spectograms & Code Features
    As the title suggests this section is concerned with calculating the training data features at three different levels.
@@ -72,7 +77,7 @@ In the end of the notebook, we choose the best autoencoder of each architecture 
    - For each data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
    m_win=m_step=1 and s_win=s_step=0.05. 
    
-     The points (along with their labels) are saved in the "training_data_hlf.pickle" file.
+     The points (along with their labels) are saved in the "training_data_hlf.pickle" file. (see "files" folder)
 
    - For each data point at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis. We note that spectograms that correspond to the same data point have the same label. Eventually, the 1031 data points yield 1491 spectograms.
      
@@ -82,7 +87,7 @@ In the end of the notebook, we choose the best autoencoder of each architecture 
           
    - For each spectogram we get its code features via the learned encoder of section 4 (use of encoder.predict() method). We have 1491 64-dim code feature vectors with the same labels as the spectograms.
 
-     The points (along with their labels and "track" list) are saved in the "training_data_cf.pickle" file.
+     The points (along with their labels and "track" list) are saved in the "training_data_cf.pickle" file. (see "files" folder)
 
 #### 6) The SVM classifier (Tuning C)
 
