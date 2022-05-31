@@ -44,16 +44,15 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    </p>
    
    By eliminating signals of size less than 30K samples, the number of the experiment contributing points is re-arranged as follows :
-   - training set: 350 "negative", 362 "neutral" and 319 "positive" points 319
-   - unlabelled set: 2781 "negative", 2674 "neutral" and 2622 "positive" points
-   - test set: 432 "negative", 421 "neutral" and 383 "positive" points
+   - training set: 350 "negative", 362 "neutral" and 319 "positive" points (1031 in total)
+   - unlabelled set: 2781 "negative", 2674 "neutral" and 2622 "positive" points (8077 in total)
+   - test set: 432 "negative", 421 "neutral" and 383 "positive" points (1236)
      (the test set numbers are computed in detail in section 7)
-
 
 #### 3) Unlabelled data : Spectograms
    In this section the spectograms of the unlabelled data are constructed. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
    
-   Eventually, we get 
+   Eventually, we get 11300 spectograms corresponding to the 8077 unlabelled data.
 
 #### 4) Convolutional Autoencoder model
 
