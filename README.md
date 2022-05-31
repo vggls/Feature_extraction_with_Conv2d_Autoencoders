@@ -2,7 +2,7 @@
 
 This repo explores the use of convolutional autoencoders as feature extraction tools when compared to hand-crafted features obtained by the pyAudioAnalysis Python library, in a scenario where the available training dataset consists of "a few" labelled points and "many" unlabelled points (of the same data source).
 
-The unlabelled points are used via their spectograms to train a symmetric convolutional autoencoder which learns feature representations of the data. In each iteration of the experiment we consider potions (percentages) of the labelled training data to train two SVM classifiers ('rbf' kernel and C=10) on their hand-crafted and autoencoder features respectively. Finally, the learned classifiers are tested on hand-crafted and code representations of a test dataset, where we keep the weighted F1 scores.
+The unlabelled points are used via their spectograms to train a symmetric convolutional autoencoder which learns feature representations of the data. In each iteration of the experiment we consider potions (percentages) of the labelled training data to train two classifiers (we consider many different types) on their hand-crafted and autoencoder features respectively. Finally, the learned classifiers are tested on hand-crafted and code representations of a test dataset, where we keep the weighted F1 scores.
 
 For the purposes of our experiments we consider data from the valence class of the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset. They are divided into "negative", "neutral" and "positive" (sub)classes.
 
@@ -47,7 +47,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    - training set: 350 "negative", 362 "neutral" and 319 "positive" points (1031 in total)
    - unlabelled set: 2781 "negative", 2674 "neutral" and 2622 "positive" points (8077 in total)
    - test set: 432 "negative", 421 "neutral" and 383 "positive" points (1236 in total)
-     (the test set numbers are computed in detail in section 7)
+     (the test set numbers are computed in detail in section 6)
 
 #### 3) Unlabelled data : Spectograms
    In this section the spectograms of the unlabelled data are constructed, at levels s_win=s_step=0.05 as per pyAudioAnalysis "spectogram" method. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
@@ -85,7 +85,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 
    - For each data point at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis. We note that spectograms that correspond to the same data point have the same label. Eventually, the 1031 data points yield 1491 spectograms.
      
-     In the code, we also introduce the "var" variable which keeps track of the data point (one among the 1031) that the spectogram/label pair comes from. This is useful in order to correctly collect the training datapoints in percentages per class in the experiment of section 8. This information is stored in the "track" list and is transferred to the code features below as well.
+     In the code, we also introduce the "var" variable which keeps track of the data point (one among the 1031) that the spectogram/label pair comes from. This is useful in order to correctly collect the training datapoints in percentages per class in the experiment of section 7. This information is stored in the "track" list and is transferred to the code features below as well.
      
      The spectograms (along with their labels and "track" list) are saved in the "training_data_spectograms.pickle" file.
           
@@ -93,10 +93,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 
      The points (along with their labels and "track" list) are saved in the "training_data_cf.pickle" file. (see "files" folder)
 
-#### 6) The SVM classifier (Tuning C)
-   In this section we decide on the type of classifier that we will use for the experiment. We use the entire training dataset, through its high level feature representations, to perform cross-validation and tune the C parameter. Eventually, we get C=10. 
-
-#### 7) Test labelled data : High Level Features, Spectograms & Code Features
+#### 6) Test labelled data : High Level Features, Spectograms & Code Features
    This section is quite similar to section no.5 with the training data; with the difference that there is no need to introduce the tracking "var" variable as the test set is used in its wholeness (and not in percentages) in the experiment. Eventually, we get:
    
    - For each test data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
@@ -112,22 +109,32 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 
         The points (along with their labels) are saved in the "test_data_cf.pickle" file. (see "files" folder)
    
-#### 8) The experiment
-   In this final section, via the "experiment" function we can perform at a fixed "training percentage" level, the following comparison :
-   - Fix training percentage level and get "part" of the total training data. We get the same "percentage" of data per class.
-   - For this part of training data, train a section 6 classifier and test it on the whole test data (for their high level representations). From this get weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
+#### 7) The experiment
+   In this final section, we use the "experiment" function, for SVM, kNN, DecisionTree, RandomForest and AdaBoost classifiers, to perform multiple iterations of the following procedure:
+   
+   Per iteration :
+   
+   - We fix a training percentage level and get "part" of the total training data. We get the same "percentage" of data per class.
+   - For this part of training data, train a classifier and test it on the whole test data (for their high level representations). From this get weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
    - Apply the above step but with the code feature representations instead. Again get a weighted F1 score. (This step needs the training_data_cf.pickle and test_data_cf.pickle files)
 
-   By applying the above procedure for multiple percentage levels (5%, 10%,.. 95% and 100%), we eventually reach the following graph which describes the respective weighted F1 scores for pyAudioAnalysis and code features as the percentage of training data gradually increases by 5%.
-
-<p align="center">
-  <img src="" />
-</p>
+   By applying the above iteration procedure for multiple percentage levels (5%, 10%,.., 95% and 100%), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 5%.
+      
+<p float="left">
+     <img src="https://user-images.githubusercontent.com/55101427/171270884-6c5871d8-905e-4ed8-b77e-ed7a2a8b7bd4.png" height="220" width="310" />
+     <img src="https://user-images.githubusercontent.com/55101427/171270978-d6b68c9c-47f1-4a02-ab4d-bfab3cb0f1b9.png" height="220" width="310" />
+     <img src="https://user-images.githubusercontent.com/55101427/171271632-32b31126-42a9-4f36-9190-e77a582ee333.png" height="220" width="370" />
+   </p>
+   
+<p float="left">
+     <img src="https://user-images.githubusercontent.com/55101427/171272101-8f6a631d-1016-46be-932a-6920f16e3727.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/171272179-e39e017d-e9ec-49af-aa8f-d794d9946cab.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/171272257-bdf00fd0-7746-4a2e-ae88-ed7f5b1040e8.png" height="220" width="330" />
+   </p>
 
 ## **********************************************************************************************
 
 #### Variations to check in future experiments
 - change min signal size
 - handle differently signals of smaller size (for instance introduce padding)
-- tune for more hyper values
-- what if tune the SVM with the training code features instead ?
+- tune autoencoder for more hyper values
