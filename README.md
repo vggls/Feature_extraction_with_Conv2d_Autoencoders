@@ -1,4 +1,4 @@
-## Repo presentation (UNDER CONSTRUCTION - to be completed by 5 June, 2022)
+## Repo Summary / Presentation (UNDER CONSTRUCTION - to be completed by 5 June, 2022)
 
 This repo explores the use of convolutional autoencoders as feature extraction tools when compared to hand-crafted features obtained by the pyAudioAnalysis Python library, in a scenario where the available training dataset consists of "a few" labelled points and "many" unlabelled points (of the same data source).
 
