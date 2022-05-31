@@ -120,7 +120,11 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 
    By applying the above procedure for multiple percentage levels (5%, 10%,.. 95% and 100%), we eventually reach the following graph which describes the respective weighted F1 scores for pyAudioAnalysis and code features as the percentage of training data gradually increases by 5%.
 
-(insert graph here)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/55101427/171235526-0224aebe-6c17-4f42-80c6-094df49c3579.png" />
+</p>
+
+## **********************************************************************************************
 
 #### Variations to check in future experiments
 - change min signal size
