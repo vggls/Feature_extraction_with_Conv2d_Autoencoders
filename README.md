@@ -46,15 +46,23 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    By eliminating signals of size less than 30K samples, the number of the experiment contributing points is re-arranged as follows :
    - training set: 350 "negative", 362 "neutral" and 319 "positive" points (1031 in total)
    - unlabelled set: 2781 "negative", 2674 "neutral" and 2622 "positive" points (8077 in total)
-   - test set: 432 "negative", 421 "neutral" and 383 "positive" points (1236)
+   - test set: 432 "negative", 421 "neutral" and 383 "positive" points (1236 in total)
      (the test set numbers are computed in detail in section 7)
 
 #### 3) Unlabelled data : Spectograms
    In this section the spectograms of the unlabelled data are constructed. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
    
-   Eventually, we get 11300 spectograms corresponding to the 8077 unlabelled data.
+   Eventually, we get 11300 spectograms corresponding to the 8077 unlabelled data. They are saved in the "spectograms_of_unlabelled_data.pickle" file.
 
 #### 4) Convolutional Autoencoder model
+   At the beginning of this section the reader is referred to two external sources, the "autoencoders.py" file and the Colab "autoencoder_training_and_tuning.ipynb" notebook. 
+   
+   The first one, includes multiple hand-written symmetric convolutional autoencoder architectures parametrized with respect to their latent dimension size (i.e. the size of the "bottleneck" layer at the center of the symmetric autoencoder). The architectures are build considering different number of convolutional layers, kernels and strides.
+   
+   On the other hand, the Colab notebook is used for training these architectures with the spectograms of section 3. It consists of the "tune_autoencoder" function which runs 8 (2^^3) training experiments per autoencoder architecture for different latent dimensions (bottleneck dimension), Adam learning rates and training batch sizes. Based on further experiments conducted we stick to the "Binary Crossentropy" loss and the "Adam" optimizer, because choices such as "MSE" loss and "SGD" optimizer did not give robust structures under many different tuning combinations. The function eventually plots the loss history of each hyperparameter combination and stores the respective encoder model. We highlight that due to Colab's limited RAM sources it was very time consuming possible to tune for more hyper-values.
+In the end of the notebook, we choose the best autoencoder of each architecture and compare them based on their loss values and their complexity.
+   
+   Returning back to "main_ntbk.ipynb", in this short section, we load the "optimal" encoder (over all tuned above) in order to use it as code feature extractor for the training and test data. 
 
 #### 5) Training labelled data : High Level Features, Spectograms & Code Features
 
@@ -71,3 +79,10 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    test_data_hlf.pickle // test_data_spectograms.pickle // test_data_cf.pickle
 
 #### 8) The experiment
+
+
+------
+Variations to check in future experiments
+- change min signal size
+- handle differently signals of smaller size (for instance introduce padding)
+- tune for more hyper values
