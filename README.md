@@ -30,13 +30,13 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    - Finally, we build the "test_folder" divided into 3 subfolders of 500 points each. These points are used for testing via their high-level and code representations.
     
 #### 2) Exploring the signal size of the audio files - Elimination of short audio files
-   The motivation for this section comes from the observation that the data of all 3 sets will be fed, through their spectograms, into the convolutional autoencoder. More specifically the unlabelled data will train the autoencoder while the training and test data will get their predicted representations from the learned encoder. 
+   The motivation for this section comes from the observation that the data of all 3 sets will be fed, via their spectograms, into the convolutional autoencoder. More specifically the unlabelled data will train the autoencoder while the training and test data will get their predicted representations from the learned encoder. 
    
    However, due to the different duration of the data we will also get spectograms of different x-axis shape and thus it is not possible to feed them directly to the network, as it requires fixed input sizes. 
    
    So, based on the above, in this section we study the files' duration a bit deeper and attempt to fix a reasonable minimum signal size per file such that files of smaller sizes can be ignored and files of larger signal sizes will be treated via multiple minimum signal size subparts. At the same time we monitor how many points are eliminated by each set and class and by how much class balance is disturbed in each set. 
    
-   For these purposes, we construct the signal boxplots of the unlabelled and training sets and conclude that the threshold of 30K as minimum signal size could reasonably satisfy the above constraints. 
+   For these purposes, we construct the signal boxplots of the unlabelled and training sets and conclude that the threshold of 30K as minimum signal size could reasonably satisfy the above constraints. This threshold corresponds to about 3.67secs (sampled at frequency 8000).
    
    <p float="left">
      <img src="https://user-images.githubusercontent.com/55101427/171047834-f0ffdb08-3605-4cbe-bddb-b658f0287c71.png" height="250" width="500" />
@@ -51,8 +51,9 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 
 
 #### 3) Unlabelled data : Spectograms
-
-   (spectograms_of_unlabelled_data.pickle)
+   In this section the spectograms of the unlabelled data are constructed. As explained above, we focus only in data with signal size of at least 30K samples and cut the signal in 30K size parts. This results in spectograms of fixed shape (74, 200). Note that the tail subparts of each signal, sized below 30K, are also eliminated by the process. 
+   
+   Eventually, we get 
 
 #### 4) Convolutional Autoencoder model
 
