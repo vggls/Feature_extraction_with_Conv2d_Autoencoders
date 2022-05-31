@@ -2,7 +2,7 @@
 
 This repo explores the use of convolutional autoencoders as feature extraction tools when compared to hand-crafted features obtained by the pyAudioAnalysis Python library, in a scenario where the available training dataset consists of "a few" labelled points and "many" unlabelled points (of the same data source).
 
-The unlabelled points are used via their spectograms to train a symmetric convolutional autoencoder which learns feature representations of the data. In each iteration of the experiment we consider potions (percentages) of the labelled training data to train two SVM classifiers of C=10 on their hand-crafted and autoencoder features respectively. Finally, the learned classifiers are tested on hand-crafted and code representations of a test dataset, where we keep the weighted F1 scores.
+The unlabelled points are used via their spectograms to train a symmetric convolutional autoencoder which learns feature representations of the data. In each iteration of the experiment we consider potions (percentages) of the labelled training data to train two SVM classifiers ('rbf' kernel and C=10) on their hand-crafted and autoencoder features respectively. Finally, the learned classifiers are tested on hand-crafted and code representations of a test dataset, where we keep the weighted F1 scores.
 
 For the purposes of our experiments we consider data from the valence class of the [MSP Podcast](https://ecs.utdallas.edu/research/researchlabs/msp-lab/MSP-Podcast.html) dataset. They are divided into "negative", "neutral" and "positive" (sub)classes.
 
@@ -87,26 +87,43 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      
      In the code, we also introduce the "var" variable which keeps track of the data point (one among the 1031) that the spectogram/label pair comes from. This is useful in order to correctly collect the training datapoints in percentages per class in the experiment of section 8. This information is stored in the "track" list and is transferred to the code features below as well.
      
-     The points (along with their labels and "track" list) are saved in the "training_data_spectograms.pickle" file.
+     The spectograms (along with their labels and "track" list) are saved in the "training_data_spectograms.pickle" file.
           
    - For each spectogram we get its code features via the learned encoder of section 4 (use of encoder.predict() method). We have 1491 64-dim code feature vectors with the same labels as the spectograms.
 
      The points (along with their labels and "track" list) are saved in the "training_data_cf.pickle" file. (see "files" folder)
 
 #### 6) The SVM classifier (Tuning C)
+   In this section we decide on the type of classifier that we will use for the experiment. We use the entire training dataset, through its high level feature representations, to perform cross-validation and tune the C parameter. Eventually, we get C=10. 
 
 #### 7) Test labelled data : High Level Features, Spectograms & Code Features
-
-   (explain how we save one pickle data for each)
+   This section is quite similar to section no.5 with the training data; with the difference that there is no need to introduce the tracking "var" variable as the test set is used in its wholeness (and not in percentages) in the experiment. Eventually, we get:
    
-   test_data_hlf.pickle // test_data_spectograms.pickle // test_data_cf.pickle
+   - For each test data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
+   m_win=m_step=1 and s_win=s_step=0.05.
+   
+       The points (along with their labels) are saved in the "test_data_hlf.pickle" file. (see "files" folder)
+   
+   - For each test point at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis.  Eventually, the 1236 test points yield 1696 spectograms.
+   
+       The spectograms (along with their labels) are saved in the "test_data_spectograms.pickle" file.
+   
+   - For each spectogram we get its code features via the learned encoder of section 4 (use of encoder.predict() method). We have 1696 64-dim code feature vectors with the same labels as the spectograms.
 
+        The points (along with their labels) are saved in the "test_data_cf.pickle" file. (see "files" folder)
+   
 #### 8) The experiment
+   In this final section, via the "experiment" function we can perform at a fixed "training percentage" level, the following comparison :
+   - Fix training percentage level and get "part" of the total training data. We get the same "percentage" of data per class.
+   - For this part of training data, train a section 6 classifier and test it on the whole test data (for their high level representations). From this get weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
+   - Apply the above step but with the code feature representations instead. Again get a weighted F1 score. (This step needs the training_data_cf.pickle and test_data_cf.pickle files)
 
+   By applying the above procedure for multiple percentage levels (5%, 10%,.. 95% and 100%), we eventually reach the following graph which describes the respective weighted F1 scores for pyAudioAnalysis and code features as the percentage of training data gradually increases by 5%.
 
-
+(insert graph here)
 
 #### Variations to check in future experiments
 - change min signal size
 - handle differently signals of smaller size (for instance introduce padding)
 - tune for more hyper values
+- what if tune the SVM with the training code features instead ?
