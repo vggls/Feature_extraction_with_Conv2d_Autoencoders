@@ -72,8 +72,8 @@ In the end of the notebook, we choose the best autoencoder of each architecture 
    - For each data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
    m_win=m_step=1 and s_win=s_step=0.05. 
    
-   The points (along with their labels) are saved in the "training_data_hlf.pickle" file.
-   
+     The points (along with their labels) are saved in the "training_data_hlf.pickle" file.
+
    - For each data point at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis. We note that spectograms that correspond to the same data point have the same label. Eventually, the 1031 data points yield 1491 spectograms.
      
      In the code, we also introduce the "var" variable which keeps track of the data point (one of the 1031) that the spectogram/label pair comes from. This is useful in order to correctly collect the training datapoints in percentages per class in section 8. This information is stored in the "track" list and is transferred to the code features below as well.
