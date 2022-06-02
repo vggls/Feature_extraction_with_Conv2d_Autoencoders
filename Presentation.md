@@ -53,8 +53,8 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    On the other hand, the Colab notebook is used for tuning and training the architectures of autoencoders.py with the spectograms of section 3. It consists of the "tune_autoencoder" function which runs 8 (2^3) training experiments per autoencoder architecture for different latent dimensions (bottleneck dimension), Adam learning rates and training batch sizes. Based on further experiments conducted we stick to the "Binary Crossentropy" loss and the "Adam" optimizer, because choices such as "MSE" loss and "SGD" optimizer did not give robust structures under many different tuning combinations. The function eventually plots the loss history of each hyperparameter combination and stores the respective encoder model. We highlight that due to Colab's limited RAM sources it was very time consuming possible to tune for more hyper-values. In the end of the notebook, we choose the best autoencoder of each architecture and compare them based on their loss values and their complexity. The chosen model is saved in the "files" folder and its summary and loss history are as follows :
    
    <p align="center">
-     <img src="https://user-images.githubusercontent.com/55101427/171223701-a75e6824-df41-4908-bcaf-3ee06e2e57ba.png" height="220" width="250" />
-     <img src="https://user-images.githubusercontent.com/55101427/171220266-a2f8ba4b-fdc7-4265-b114-209961575d38.png" height="330" width="300" />
+     <img src="https://user-images.githubusercontent.com/55101427/171587494-bc27adfc-611d-46fe-a218-ccfd936dc095.png" height="220" width="250" />
+     <img src="https://user-images.githubusercontent.com/55101427/171587732-a31e0a52-748d-40ec-88ac-b0cdeca4872e.png" height="330" width="300" />
    </p>
    
    Returning back to "main_ntbk.ipynb", in the short section no. 4, we load the "optimal" encoder (over all tuned above) in order to use it as code feature extractor for the training and test data. 
@@ -107,20 +107,20 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    By applying the above iteration procedure for multiple percentage levels (5%, 10%,.., 95% and 100%), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 5%.
       
 <p float="left">
-     <img src="https://user-images.githubusercontent.com/55101427/171270884-6c5871d8-905e-4ed8-b77e-ed7a2a8b7bd4.png" height="220" width="310" />
-     <img src="https://user-images.githubusercontent.com/55101427/171270978-d6b68c9c-47f1-4a02-ab4d-bfab3cb0f1b9.png" height="220" width="310" />
-     <img src="https://user-images.githubusercontent.com/55101427/171271632-32b31126-42a9-4f36-9190-e77a582ee333.png" height="220" width="370" />
+     <img src="https://user-images.githubusercontent.com/55101427/171588810-858a90ff-180e-41ad-b8fd-5aa3e1a5ab36.png" height="220" width="310" />
+     <img src="https://user-images.githubusercontent.com/55101427/171588907-e4264de5-c439-411d-9f64-ee68d6a641af.png" height="220" width="310" />
+     <img src="https://user-images.githubusercontent.com/55101427/171589014-5325cc4c-a414-41ec-a95f-aa8140509472.png" height="220" width="370" />
    </p>
    
 <p float="left">
-     <img src="https://user-images.githubusercontent.com/55101427/171272101-8f6a631d-1016-46be-932a-6920f16e3727.png" height="220" width="330" />
-     <img src="https://user-images.githubusercontent.com/55101427/171272179-e39e017d-e9ec-49af-aa8f-d794d9946cab.png" height="220" width="330" />
-     <img src="https://user-images.githubusercontent.com/55101427/171272257-bdf00fd0-7746-4a2e-ae88-ed7f5b1040e8.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/171589144-69e44043-43e3-45d3-ad8a-d21e6ff279bb.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/171589313-88bbcfca-9af5-422f-b49d-2c37a5249920.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/171589418-af861e81-2b78-45a4-94ec-56d292cbaa2f.png" height="220" width="330" />
    </p>
 
 ## **********************************************************************************************
 
 #### Variations to check in future experiments
-- change min signal size
-- handle differently signals of smaller size (for instance introduce padding)
-- tune autoencoder for more hyper values
+- Change min signal size (above was 30K samples)
+- Handle differently signals of smaller size (for instance introduce 0-padding)
+- Tune autoencoder for more hyper values
