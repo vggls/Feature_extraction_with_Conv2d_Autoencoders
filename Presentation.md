@@ -101,10 +101,10 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    Per iteration :
    
    - We fix a training percentage level and get "part" of the total training data. We get the same "percentage" of data per class.
-   - For this part of training data, train a classifier and test it on the whole test data (for their high level representations). From this get weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
+   - For this part of training data, we consider their high level representations and train a classifier. Then we test it on the entire test dataset considering the high level representations of the data. From this get a weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
    - Apply the above step but with the code feature representations instead. Again get a weighted F1 score. (This step needs the training_data_cf.pickle and test_data_cf.pickle files)
 
-   By applying the above iteration procedure for multiple percentage levels (5%, 10%,.., 95% and 100%), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 5%.
+   By applying the above iteration procedure for multiple percentage levels, 5%, 10%,.., 95% and 100% (20 iterations in total), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 5%.
       
 <p float="left">
      <img src="https://user-images.githubusercontent.com/55101427/171588810-858a90ff-180e-41ad-b8fd-5aa3e1a5ab36.png" height="220" width="310" />
@@ -118,9 +118,12 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      <img src="https://user-images.githubusercontent.com/55101427/171589418-af861e81-2b78-45a4-94ec-56d292cbaa2f.png" height="220" width="330" />
    </p>
 
+At this final point it is essential to highlight the graph of the Random Forest classifier. We observe that as long as we consider training batches of up to 55% of the original dataset the autoencoder features outperform the hand-crafted ones.
+
 ## **********************************************************************************************
 
 #### Variations to check in future experiments
 - Change min signal size (above was 30K samples)
 - Handle differently signals of smaller size (for instance introduce 0-padding)
 - Tune autoencoder for more hyper values
+- Consider more hyper-parameter values for the classifiers (apart from the default ones used here)
