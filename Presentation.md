@@ -104,21 +104,21 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    - For this part of training data, we consider their high level representations and train a classifier. Then we test it on the entire test dataset considering the high level representations of the data. From this get a weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
    - Apply the above step but with the code feature representations instead. Again get a weighted F1 score. (This step needs the training_data_cf.pickle and test_data_cf.pickle files)
 
-   By applying the above iteration procedure for multiple percentage levels, 5%, 10%,.., 95% and 100% (20 iterations in total), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 5%.
+   By applying the above iteration procedure for multiple percentage levels, 2%, 4%, 6%.., 98% and 100% (50 iterations in total), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 2%.
       
 <p float="left">
-     <img src="https://user-images.githubusercontent.com/55101427/171588810-858a90ff-180e-41ad-b8fd-5aa3e1a5ab36.png" height="220" width="310" />
-     <img src="https://user-images.githubusercontent.com/55101427/171588907-e4264de5-c439-411d-9f64-ee68d6a641af.png" height="220" width="310" />
-     <img src="https://user-images.githubusercontent.com/55101427/171589014-5325cc4c-a414-41ec-a95f-aa8140509472.png" height="220" width="370" />
+     <img src="https://user-images.githubusercontent.com/55101427/172442132-d96c3f75-ccec-4cde-b0a5-b2a031063c42.png" height="220" width="310" />
+     <img src="https://user-images.githubusercontent.com/55101427/172442246-36200781-8710-4fef-9de7-6e4e755a3207.png" height="220" width="310" />
+     <img src="https://user-images.githubusercontent.com/55101427/172442351-a9beea69-76da-4331-b118-beceb6ed1221.png" height="220" width="370" />
    </p>
    
 <p float="left">
-     <img src="https://user-images.githubusercontent.com/55101427/171589144-69e44043-43e3-45d3-ad8a-d21e6ff279bb.png" height="220" width="330" />
-     <img src="https://user-images.githubusercontent.com/55101427/171589313-88bbcfca-9af5-422f-b49d-2c37a5249920.png" height="220" width="330" />
-     <img src="https://user-images.githubusercontent.com/55101427/171589418-af861e81-2b78-45a4-94ec-56d292cbaa2f.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/172442458-b9883f36-6782-4e46-99bd-8f41bc9a125d.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/172442572-817141ca-9bad-4a1e-acdd-b52a7f3a9c91.png" height="220" width="330" />
+     <img src="https://user-images.githubusercontent.com/55101427/172442681-e95ff73d-033c-4aed-b9d7-aa3caceb83c1.png" height="220" width="330" />
    </p>
 
-At this final point it is essential to highlight the graph of the Random Forest classifier. We observe that as long as we consider training batches of up to 55% of the original dataset the autoencoder features outperform the hand-crafted ones.
+At this final point it is essential to highlight the graph of the Random Forest classifier. We observe that as long as we consider training batches of up to 56% of the original dataset the autoencoder features outperform the hand-crafted ones.
 
 ## **********************************************************************************************
 
