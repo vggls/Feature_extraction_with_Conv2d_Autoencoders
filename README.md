@@ -16,4 +16,4 @@ Important note: In order to run the full experiment again, the user needs the pi
 - Presentation.pdf : A short presentation of the repo
 - "files" folder : Contains training and test data features pickle files and the final encoder model that we use for code feature extraction.
 - another_approach.md : This file contains only the results obtained when performing above experiment with min_signal = 20K (equivalent to spectogram size = (49,200)).
-Note that all other files included in this repo refer to min_signal = 30K. The 20K expreriment graphs are presented for informational purposes.
+Note that ALL files included in this repo refer to min_signal = 30K. The 20K expreriment graphs are presented for informational purposes.
