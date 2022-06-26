@@ -7,6 +7,9 @@ From now one we refer to the hand-crafted features of pyAudioAnalysis as "high-l
 The "main_ntbk.ipynb" notebook is structured as follows :
 
 #### 1) MSP Podcast
+
+   The data comes from the MSP Podcast valence class samples, categorized into negative, neutral, positive.
+
    In this study we divide the data into 3 speaker independent sets; named Training (labelled) set, Unlabelled set and Test (labelled) set. This section is dedicated into properly constructing them.
    
    - In the first place we build a "training_folder" divided into 3 subfolders of 400 audio points each (one subfolder for each valence class). The purpose of this set is to represent the "small" group of labelled training data.
