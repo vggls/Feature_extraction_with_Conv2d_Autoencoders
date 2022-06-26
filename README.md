@@ -8,7 +8,7 @@ For the purposes of our experiments we consider data from the valence class of t
 
 In short, this repo consists of the following :
 - main_ntbk.ipynb : This is the main notebook that one should read to go through the experiment steps and results.
-- Presentation.md : This file is a detailed presentation of the "main_ntbk.ipynb"
+- Report.md : This file is a detailed report of the "main_ntbk.ipynb"
 - autoencoders.py : Contains hand-written symmetric convolutional autoencoder architectures. They take as input fixed size spectograms of (74,200) size and are parametrized with respect to the latent (bottleneck) dimension of the autoencoder.  
 - autoencoder_training_tuning.ipynb : Colab notebook that contains the training and tuning of the architectures included in the autoencoders.py file.
 - "files" folder : Contains training and test data features pickle files and the final encoder model that we use for code feature extraction.
