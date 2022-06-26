@@ -1,4 +1,15 @@
-For min_signal = 20000 samples, the results obtained are as follows :
+For min_signal = 20000 samples the spectograms are of shape (49,200).
+
+The autoencoder was again compiled with Binary Crossentropy and Adam at 0.001 learning rate and its loss history was as follows :
+
+<img src="https://user-images.githubusercontent.com/55101427/175825772-9bcb5b22-b384-44eb-8670-ebbd0c8dece8.png" height="220" width="310" />
+
+and the encoder summary was :
+
+<img src="https://user-images.githubusercontent.com/55101427/175825819-019c2ae2-79e2-49e3-bb53-5ed1681f4fd1.png" height="330" width="330" />
+
+
+Finally, the results obtained are as follows :
 
 <p float="left">
      <img src="https://user-images.githubusercontent.com/55101427/175825101-1b977604-85d2-43d3-9576-a6197116b2f8.png" height="220" width="310" />
