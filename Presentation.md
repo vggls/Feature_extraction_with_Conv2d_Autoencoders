@@ -16,7 +16,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    - Finally, we build the "test_folder" divided into 3 subfolders of 500 points each. These points are used for testing via their high-level and code representations.
     
 #### 2) Exploring the signal size of the audio files - Elimination of short audio files
-   The motivation for this section comes from the observation that the data of all 3 sets will be fed, via their spectograms, into the convolutional autoencoder. More specifically the unlabelled data will train the autoencoder while the training and test data will get their predicted representations from the learned encoder. 
+   The motivation for this section comes from the observation that the data of all 3 sets will be fed, via their spectograms, into the convolutional autoencoder. More specifically the unlabelled data will train the autoencoder while the training and test data will get their code feature representations from the learned encoder. 
    
    However, due to the different duration of the data we will also get spectograms of different x-axis shape and thus it is not possible to feed them directly to the network, as it requires fixed input sizes. 
    
