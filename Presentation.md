@@ -1,6 +1,6 @@
-## Repo Presentation
+## Repo Report
 
-Below one may find a detailed presentation of the main points and results to consider while reading the "main_ntbk.ipynb" file. 
+Below one may find a detailed report of the main points and results to consider while reading the "main_ntbk.ipynb" file. 
 
 From now one we refer to the hand-crafted features of pyAudioAnalysis as "high-level features" and the features extracted at the central layer of the autoencoder as "code features".
 
