@@ -18,7 +18,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
 #### 2) Exploring the signal size of the audio files - Elimination of short audio files
    The motivation for this section comes from the observation that the data of all 3 sets will be fed, via their spectograms, into the convolutional autoencoder. More specifically the unlabelled data will train the autoencoder while the training and test data will get their code feature representations from the learned encoder. 
    
-   However, due to the different duration of the data we will also get spectograms of different x-axis shape and thus it is not possible to feed them directly to the network, as it requires fixed input sizes. 
+   However, the different duration of the audio wav data results in spectograms of different x-axis shape and consequently it is not possible to feed them directly to the network, as it requires fixed input sizes. 
    
    So, based on the above, in this section we study the files' duration a bit deeper and attempt to fix a reasonable minimum signal size per file such that files of smaller sizes can be ignored and files of larger signal sizes will be treated via multiple minimum signal size subparts. At the same time we monitor how many points are eliminated by each set and class and by how much class balance is disturbed in each set. 
    
