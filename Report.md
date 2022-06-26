@@ -52,9 +52,9 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    
    On the other hand, the Colab notebook is used for tuning and training the architectures of autoencoders.py with the spectograms obtained from section 3. It consists of the "tune_autoencoder" function which runs 8 (2^3) training experiments per autoencoder architecture for different latent dimensions (bottleneck dimension), Adam learning rates and training batch sizes. They are monitored with the EarlyStopping regularizer. Based on further experiments conducted we stick to the "Binary Crossentropy" loss and the "Adam" optimizer, because choices such as "MSE" loss and "SGD" optimizer did not give promising structures under any tuning combinations. The function eventually plots the loss history of each hyperparameter combination and stores the respective encoder model. We highlight that due to Colab's limited RAM sources it was very time consuming to tune for more hyper-values. In the end of the notebook, we choose the best autoencoder of each architecture and compare them based on their loss values and their complexity. 
    
-   The chosen architecture's ***encoder*** part is saved in the "files" folder and its ***summary*** is shown below (right image).
+   The chosen architecture's ***encoder*** part is saved in the "files" folder and its ***summary*** is shown below in the ***right image***.
    
-   In addition, in the left image we see the ***loss history*** of the respective ***autoencoder*** model.
+   In addition, in the ***left image*** we see the ***loss history*** of the respective ***autoencoder*** model.
    
    <p align="center">
      <img src="https://user-images.githubusercontent.com/55101427/171587494-bc27adfc-611d-46fe-a218-ccfd936dc095.png" height="220" width="250" />
