@@ -6,16 +6,12 @@ The image shape is (74, 200, 1).
 
 REFERENCES :
     
-https://github.com/nlinc1905/Convolutional-Autoencoder-Music-Similarity/blob/master/03_autoencoding_and_tsne.py
-
 https://analyticsindiamag.com/how-to-implement-convolutional-autoencoder-in-pytorch-with-cuda/
 
 https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose
 
 https://www.reddit.com/r/MachineLearning/comments/ef1xe8/d_should_autoencoders_really_be_symmetric/
     
-https://stackoverflow.com/questions/61614366/convolutional-autoencoders
-
 """
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Conv2DTranspose, Reshape, Dropout
 from keras.models import Model
