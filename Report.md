@@ -67,16 +67,16 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    Returning back to "main_ntbk.ipynb", in the short section no. 4, we load the "optimal" encoder (over all tuned above) in order to use it as code feature extractor for the training and test data. 
   
 #### 5) Training labelled data : High Level Features, Spectograms & Code Features
-   As the title suggests this section is concerned with calculating the training data features at three different levels.
+   As the title suggests this section focuses on calculating the training data features at three different levels.
    
-   We deal with the signal size exactly as in section 3, and we get the following :
+   We deal with the signal size exactly as in section 3, and the following features come up:
    
-   - For each training data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
-   m_win=m_step=1 and s_win=s_step=0.05. 
+   - For each training data point we get a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
+   m_win=m_step=1 and s_win=s_step=0.05.
    
      The points (along with their labels) are saved in the "training_data_hlf.pickle" file. (see "files" folder)
 
-   - For each data point at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis. We note that spectograms that correspond to the same data point have the same label. Eventually, the 1031 data points yield 1491 spectograms.
+   - For each data point we get at least one (or more) spectogram(s) of size (74, 200) via the "spectogram" method of pyAudioAnalysis. We note that spectograms that correspond to the same data point have the same label. Eventually, the 1031 data points yield 1491 spectograms.
      
      In the code, we also introduce the "var" variable which keeps track of the data point (one among the 1031) that the spectogram/label pair comes from. This is useful in order to correctly collect the training datapoints in percentages per class in the experiment of section 7. This information is stored in the "track" list and is transferred to the code features below as well.
      
@@ -87,7 +87,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      The points (along with their labels and "track" list) are saved in the "training_data_cf.pickle" file. (see "files" folder)
 
 #### 6) Test labelled data : High Level Features, Spectograms & Code Features
-   This section is quite similar to section no.5 with the training data; with the difference that there is no need to introduce the tracking "var" variable as the test set is used in its wholeness (and not in percentages) in the experiment. Eventually, we get:
+   This section is quite similar to section no.5 above; with the difference that there is no need to introduce the tracking "var" variable as the test set is used in its wholeness (and not in percentages) in the experiment. Eventually, we get:
    
    - For each test data point a 136-dim high level features vector via the "mid_feature_extraction" method of pyAudioAnalysis. The calculations are based
    m_win=m_step=1 and s_win=s_step=0.05.
@@ -108,7 +108,7 @@ The "main_ntbk.ipynb" notebook is structured as follows :
    Per iteration :
    
    - We fix a training percentage level and get "part" of the total training data. We get the same "percentage" of data per class.
-   - For this part of training data, we consider their high level representations and train a classifier. Then we test it on the entire test dataset considering the high level representations of the data. From this get a weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
+   - For this part of training data, we consider their high level representations and train a classifier. Then we test it on the entire test dataset considering its high level representations as well. From this get a weighted F1 score. (This step needs the training_data_hlf.pickle and test_data_hlf.pickle files)
    - Apply the above step but with the code feature representations instead. Again get a weighted F1 score. (This step needs the training_data_cf.pickle and test_data_cf.pickle files)
 
    By applying the above iteration procedure for multiple percentage levels, 2%, 4%, 6%.., 98% and 100% (50 iterations in total), we eventually reach the following graphs (per classifier) which describe the respective weighted F1 scores for pyAudioAnalysis and code features, as the percentage of training data gradually increases by 2%.
@@ -125,12 +125,12 @@ The "main_ntbk.ipynb" notebook is structured as follows :
      <img src="https://user-images.githubusercontent.com/55101427/172442681-e95ff73d-033c-4aed-b9d7-aa3caceb83c1.png" height="220" width="330" />
    </p>
 
-At this final point it is essential to highlight the graph of the Random Forest classifier. We observe that as long as we consider training batches of up to 56% of the original dataset the autoencoder features outperform the hand-crafted ones.
+At this final point it is essential to highlight the graph of the Random Forest classifier. We observe that as long as we consider training batches of up to 56% of the original training dataset the autoencoder features outperform the hand-crafted ones.
 
 ## **********************************************************************************************
 
 #### Variations to check in future experiments
-- Consider larger min_signal size (not that for the min_signal = 20K the results are presented in the another_approach.md file)
+- Consider min_signal size larger than 30K (note that for min_signal = 20K the results are presented in the another_approach.md file)
 - Handle differently signals of smaller size (for instance introduce 0-padding)
 - Tune autoencoder for more hyper values
 - Consider more hyper-parameter values for the classifiers (apart from the default ones used here)
