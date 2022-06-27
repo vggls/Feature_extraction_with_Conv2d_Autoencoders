@@ -132,5 +132,5 @@ At this final point it is essential to highlight the graph of the Random Forest 
 #### Variations to check in future experiments
 - Consider min_signal size larger than 30K (note that for min_signal = 20K the results are presented in the another_approach.md file)
 - Handle differently signals of smaller size (for instance introduce 0-padding)
-- Tune autoencoder for more hyper values
+- Tune autoencoder for more hyper values (such as activation functions etc)
 - Consider more hyper-parameter values for the classifiers (apart from the default ones used here)
