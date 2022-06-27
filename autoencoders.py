@@ -34,7 +34,7 @@ def autoencoder_1(latent_dim):
     enc = Flatten()(enc)
     
     #BOTTLENECK
-    code_features = Dense(latent_dim, activation='softmax')(enc)
+    code_features = Dense(latent_dim, activation='relu')(enc) #softmax
     encoder = Model(enc_input, code_features)
     #encoded_imgs = encoder.predict(x_train)
     
@@ -68,7 +68,7 @@ def autoencoder_2(latent_dim):
     enc = Flatten()(enc)
     
     #BOTTLENECK
-    code_features = Dense(latent_dim, activation='softmax')(enc)
+    code_features = Dense(latent_dim, activation='relu')(enc) #softmax
     encoder = Model(enc_input, code_features)
     
     #DECODER
